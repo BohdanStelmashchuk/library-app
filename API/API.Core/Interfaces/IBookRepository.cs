@@ -8,6 +8,6 @@ namespace API.Core.Interfaces
         Task<IEnumerable<Book>> GetAllAsync();
         Task AddAsync(Book book);
         Task UpdateAsync(int id, Book book);
-        Task DeleteAsync(int id);
+        Task DeleteByIdAsync(int id);
     }
 }

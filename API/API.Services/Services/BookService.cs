@@ -32,7 +32,7 @@ namespace API.Services.Services
             await _bookRepository.UpdateAsync(id, book);
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteByIdAsync(int id)
         {
             await _bookRepository.DeleteAsync(id);
         }

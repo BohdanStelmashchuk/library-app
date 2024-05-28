@@ -16,14 +16,14 @@ namespace API.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllBooks()
+        public async Task<IActionResult> GetAllBooksAsync()
         {
             var books = await _bookService.GetAllAsync();
             return Ok(books);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetBook(int id)
+        public async Task<IActionResult> GetBookByIdAsync(int id)
         {
             var book = await _bookService.GetByIdAsync(id);
 
@@ -32,7 +32,7 @@ namespace API.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddAsync(CreateBookDto bookDto)
+        public async Task<IActionResult> AddBookAsync(CreateBookDto bookDto)
         {
             var book = CreateBookDto.ToEntity(bookDto);
 
@@ -41,7 +41,7 @@ namespace API.Web.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAsync(int id, UpdateBookDto updateBookDto)
+        public async Task<IActionResult> UpdateBookAsync(int id, UpdateBookDto updateBookDto)
         {
             var book = UpdateBookDto.ToEntity(updateBookDto);
             await _bookService.UpdateAsync(id, book);
@@ -49,7 +49,7 @@ namespace API.Web.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync(int id)
+        public async Task<IActionResult> DeleteBookByIdAsync(int id)
         {
             try
             {
