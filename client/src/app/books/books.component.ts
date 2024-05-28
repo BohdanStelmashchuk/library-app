@@ -19,8 +19,7 @@ export class BooksComponent implements OnInit, OnDestroy {
   private destroySubject = new Subject();
 
   constructor(private route: ActivatedRoute,
-              private bookService: BooksService) {
-  }
+              private bookService: BooksService) {}
 
   ngOnInit() {
     this.route.data.pipe(
@@ -47,7 +46,11 @@ export class BooksComponent implements OnInit, OnDestroy {
     ).subscribe({
       next: value => this.booksSubject.next(value)
       }
-    )
+    );
+
+    this.filterObservable$.subscribe({
+      next: value => console.log(value)
+    })
   }
 
   ngOnDestroy() {
@@ -66,48 +69,3 @@ export class BooksComponent implements OnInit, OnDestroy {
     this.authorsFilter$.next(value.split(','));
   }
 }
-    // this.filterObservable$ = combineLatest([
-    //   this.titleFilter$.asObservable(),
-    //   this.authorsFilter$.asObservable()]).pipe(
-    //   debounceTime(800),
-    //   map(([title, authors]) => ({
-    //     title,
-    //     authors
-    //   })),
-    //   switchMap(filter => this.filterBooks(filter))
-    // );
-  //}
-
-
-
-  // sendFilterToBackend() {
-  //   const filterObservable$ = combineLatest([
-  //     this.titleFilter$.asObservable(),
-  //     this.authorsFilter$.asObservable()]).pipe(
-  //       debounceTime(800),
-  //       map(([title, authors]) => ({
-  //         title,
-  //         authors
-  //       })),
-  //       switchMap(filter => this.filterBooks(filter))
-  //     );
-
-  //   this.subscriptions.push(
-  //     filterObservable$.subscribe(filteredBooks => {
-  //       this.filteredBooks = filteredBooks;
-  //     })
-  //   );
-  // }
-
-  // filterBooks(filter: {title: string, authors: string}) {
-  //   return this.booksService.getBooks().pipe(
-  //     map(books => {
-  //       return books.filter(book => {
-  //         const matchesTitle = book.title.toLowerCase().includes(filter.title.toLowerCase());
-  //         const matchesAuthors = book.authors?.some(author => author.toLowerCase().includes(filter.authors.toLowerCase()));
-  //         return matchesTitle && matchesAuthors;
-  //       });
-  //     })
-  //   );
-  // }
-
