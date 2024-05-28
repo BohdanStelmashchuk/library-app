@@ -8,8 +8,11 @@ namespace API.Web.DTOs.BookDtos
         public string ISBN { get; set; }
         public decimal Price { get; set; }
         public int PublisherId { get; set; }
+    }
 
-        public static Book ToEntity(UpdateBookDto updateBookDto)
+    public static class UpdateBookMapper
+    {
+        public static Book ToEntity(this UpdateBookDto updateBookDto)
         {
             return new Book
             {

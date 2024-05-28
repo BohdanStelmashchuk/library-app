@@ -9,8 +9,11 @@ namespace API.Web.DTOs.BookDtos
         public string ISBN { get; set; }
         public decimal Price { get; set; }
         public int PublisherId { get; set; }
+    }
 
-        public static BookDto ToDto(Book book)
+    public static class BookMapper
+    {
+        public static BookDto ToDto(this Book book)
         {
             return new BookDto
             {

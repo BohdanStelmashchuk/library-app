@@ -34,7 +34,7 @@ namespace API.Services.Services
 
         public async Task DeleteByIdAsync(int id)
         {
-            await _bookRepository.DeleteAsync(id);
+            await _bookRepository.DeleteByIdAsync(id);
         }
     }
 }

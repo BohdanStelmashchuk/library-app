@@ -21,20 +21,20 @@ namespace API.Web.Controllers
             var books = await _bookService.GetAllAsync();
             return Ok(books);
         }
-
+        
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBookByIdAsync(int id)
         {
             var book = await _bookService.GetByIdAsync(id);
 
-            var bookDto = BookDto.ToDto(book);
+            var bookDto = book.ToDto();
             return Ok(bookDto);
         }
 
         [HttpPost]
         public async Task<IActionResult> AddBookAsync(CreateBookDto bookDto)
         {
-            var book = CreateBookDto.ToEntity(bookDto);
+            var book = bookDto.ToEntity();
 
             await _bookService.AddAsync(book);
             return Ok();
@@ -43,7 +43,7 @@ namespace API.Web.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateBookAsync(int id, UpdateBookDto updateBookDto)
         {
-            var book = UpdateBookDto.ToEntity(updateBookDto);
+            var book = updateBookDto.ToEntity();
             await _bookService.UpdateAsync(id, book);
             return Ok();
         }
@@ -53,7 +53,7 @@ namespace API.Web.Controllers
         {
             try
             {
-                await _bookService.DeleteAsync(id);
+                await _bookService.DeleteByIdAsync(id);
                 return Ok();
             }
 
