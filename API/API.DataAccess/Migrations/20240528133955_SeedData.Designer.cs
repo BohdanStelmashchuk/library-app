@@ -4,6 +4,7 @@ using API.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240528133955_SeedData")]
+    partial class SeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,62 +76,6 @@ namespace API.DataAccess.Migrations
                             Email = "simon.collins@gmail.com",
                             Name = "Simon",
                             Surname = "Collins"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            BirthDate = new DateTime(1990, 12, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "sarah.brown@example.com",
-                            Name = "Sarah",
-                            Surname = "Brown"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            BirthDate = new DateTime(1972, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "michael.jones@example.com",
-                            Name = "Michael",
-                            Surname = "Jones"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            BirthDate = new DateTime(1985, 2, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "rachel.miller@example.com",
-                            Name = "Rachel",
-                            Surname = "Miller"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            BirthDate = new DateTime(1968, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "david.martinez@example.com",
-                            Name = "David",
-                            Surname = "Martinez"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            BirthDate = new DateTime(1983, 6, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "jessica.garcia@example.com",
-                            Name = "Jessica",
-                            Surname = "Garcia"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            BirthDate = new DateTime(1977, 4, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "kevin.taylor@example.com",
-                            Name = "Kevin",
-                            Surname = "Taylor"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            BirthDate = new DateTime(1995, 8, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "michelle.lee@example.com",
-                            Name = "Michelle",
-                            Surname = "Lee"
                         });
                 });
 
@@ -193,166 +140,6 @@ namespace API.DataAccess.Migrations
                             Price = 14.99m,
                             PublisherId = 1,
                             Title = "A Storm of Swords"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            ISBN = "ISBN-345678901",
-                            Price = 11.25m,
-                            PublisherId = 1,
-                            Title = "The Catcher in the Rye"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            ISBN = "ISBN-876543210",
-                            Price = 15.99m,
-                            PublisherId = 1,
-                            Title = "Harry Potter and the Philosopher's Stone"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            ISBN = "ISBN-567890123",
-                            Price = 14.50m,
-                            PublisherId = 2,
-                            Title = "To the Lighthouse"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            ISBN = "ISBN-210987654",
-                            Price = 13.25m,
-                            PublisherId = 1,
-                            Title = "Moby-Dick"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            ISBN = "ISBN-789012345",
-                            Price = 16.75m,
-                            PublisherId = 1,
-                            Title = "The Hobbit"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            ISBN = "ISBN-321098765",
-                            Price = 10.99m,
-                            PublisherId = 2,
-                            Title = "Lord of the Flies"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            ISBN = "ISBN-654321098",
-                            Price = 9.50m,
-                            PublisherId = 2,
-                            Title = "Brave New World"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            ISBN = "ISBN-543210987",
-                            Price = 8.25m,
-                            PublisherId = 1,
-                            Title = "Wuthering Heights"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            ISBN = "ISBN-432109876",
-                            Price = 11.75m,
-                            PublisherId = 2,
-                            Title = "The Grapes of Wrath"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            ISBN = "ISBN-210987654",
-                            Price = 14.99m,
-                            PublisherId = 2,
-                            Title = "One Hundred Years of Solitude"
-                        },
-                        new
-                        {
-                            Id = 15,
-                            ISBN = "ISBN-789012345",
-                            Price = 17.50m,
-                            PublisherId = 1,
-                            Title = "The Lord of the Rings"
-                        },
-                        new
-                        {
-                            Id = 16,
-                            ISBN = "ISBN-543210987",
-                            Price = 12.25m,
-                            PublisherId = 2,
-                            Title = "Animal Farm"
-                        },
-                        new
-                        {
-                            Id = 17,
-                            ISBN = "ISBN-654321098",
-                            Price = 15.75m,
-                            PublisherId = 1,
-                            Title = "Fahrenheit 451"
-                        },
-                        new
-                        {
-                            Id = 18,
-                            ISBN = "ISBN-432109876",
-                            Price = 10.99m,
-                            PublisherId = 1,
-                            Title = "Gone with the Wind"
-                        },
-                        new
-                        {
-                            Id = 19,
-                            ISBN = "ISBN-321098765",
-                            Price = 9.50m,
-                            PublisherId = 2,
-                            Title = "The Odyssey"
-                        },
-                        new
-                        {
-                            Id = 20,
-                            ISBN = "ISBN-789012345",
-                            Price = 14.25m,
-                            PublisherId = 1,
-                            Title = "Crime and Punishment"
-                        },
-                        new
-                        {
-                            Id = 21,
-                            ISBN = "ISBN-123456789",
-                            Price = 12.99m,
-                            PublisherId = 2,
-                            Title = "The Great Gatsby"
-                        },
-                        new
-                        {
-                            Id = 22,
-                            ISBN = "ISBN-987654321",
-                            Price = 10.50m,
-                            PublisherId = 1,
-                            Title = "To Kill a Mockingbird"
-                        },
-                        new
-                        {
-                            Id = 23,
-                            ISBN = "ISBN-234567890",
-                            Price = 9.99m,
-                            PublisherId = 1,
-                            Title = "1984"
-                        },
-                        new
-                        {
-                            Id = 24,
-                            ISBN = "ISBN-098765432",
-                            Price = 8.75m,
-                            PublisherId = 2,
-                            Title = "Pride and Prejudice"
                         });
                 });
 
