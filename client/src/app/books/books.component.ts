@@ -47,10 +47,6 @@ export class BooksComponent implements OnInit, OnDestroy {
       next: value => this.booksSubject.next(value)
       }
     );
-
-    this.filterObservable$.subscribe({
-      next: value => console.log(value)
-    })
   }
 
   ngOnDestroy() {

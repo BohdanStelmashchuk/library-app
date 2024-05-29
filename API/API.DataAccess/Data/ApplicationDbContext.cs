@@ -1,4 +1,6 @@
 ﻿using API.Core.Entities;
+using API.Core.Models;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.DataAccess.Data
@@ -11,6 +13,7 @@ namespace API.DataAccess.Data
         public DbSet<Loan> Loans { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
         public DbSet<BookAuthor> BookAuthors { get; set; }
+        public DbSet<FilteredBooks> FilteredBooks { get; set; }
 
         public ApplicationDbContext (DbContextOptions<ApplicationDbContext> options) : base(options) {}
 
@@ -40,6 +43,9 @@ namespace API.DataAccess.Data
                 .HasForeignKey(l => l.BorrowerId);
 
             modelBuilder.Entity<Book>().Property(x => x.Price).HasPrecision(10, 5);
+
+            modelBuilder.Entity<FilteredBooks>().HasNoKey();
+            base.OnModelCreating(modelBuilder);
 
             var bookList = new Book[]
             {
@@ -93,7 +99,18 @@ namespace API.DataAccess.Data
 
             };
             modelBuilder.Entity<Author>().HasData(authorList);
-
         }
+
+        public async Task<List<FilteredBooks>> GetFilteredBooksAsync(BookFilter bookFilter)
+        {
+            var titleParam = new SqlParameter("@Title", bookFilter.Title ?? (object)DBNull.Value);
+            var authorsParam = new SqlParameter("@Authors", string.Join(",", bookFilter.Authors));
+
+            var result = await FilteredBooks.FromSqlRaw("EXEC [dbo].[GetFilteredBooks] @Title, @Authors", titleParam, authorsParam)
+                                            .ToListAsync();
+
+            return result;
+        }
+
     }
 }

@@ -1,4 +1,6 @@
-﻿using API.Core.Interfaces;
+﻿using API.Core.Entities;
+using API.Core.Interfaces;
+using API.Core.Models;
 using API.Web.DTOs.BookDtos;
 using Microsoft.AspNetCore.Mvc;
 
@@ -38,6 +40,15 @@ namespace API.Web.Controllers
 
             await _bookService.AddAsync(book);
             return Ok();
+        }
+
+        [HttpPost("filter")]
+        public async Task<List<FilteredBooks>> GetFilteredBooks(BookFilterDto bookFilterDto)
+        {
+            var filters = bookFilterDto.ToFilterModel();
+
+            var books = await _bookService.GetFilteredAsync(filters);
+            return books;
         }
 
         [HttpPut("{id}")]

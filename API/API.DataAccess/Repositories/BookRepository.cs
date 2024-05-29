@@ -1,5 +1,6 @@
 ﻿using API.Core.Entities;
 using API.Core.Interfaces;
+using API.Core.Models;
 using API.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,6 +24,11 @@ public class BookRepository : IBookRepository
     {
         var book = await _dbContext.Books.FirstOrDefaultAsync(x => x.Id == id);
         return book == null ? throw new KeyNotFoundException() : book;
+    }
+
+    public async Task<List<FilteredBooks>> GetFilteredAsync(BookFilter bookFilter)
+    {
+        return await _dbContext.GetFilteredBooksAsync(bookFilter);
     }
 
     public async Task AddAsync(Book book)

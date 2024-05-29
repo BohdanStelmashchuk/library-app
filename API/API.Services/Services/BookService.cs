@@ -1,5 +1,6 @@
 ﻿using API.Core.Entities;
 using API.Core.Interfaces;
+using API.Core.Models;
 
 namespace API.Services.Services
 {
@@ -20,6 +21,11 @@ namespace API.Services.Services
         public async Task<Book> GetByIdAsync(int id)
         {
             return await _bookRepository.GetByIdAsync(id);
+        }
+
+        public async Task<List<FilteredBooks>> GetFilteredAsync(BookFilter bookFilter)
+        {
+            return await _bookRepository.GetFilteredAsync(bookFilter);
         }
 
         public async Task AddAsync(Book book)
