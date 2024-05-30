@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../environments/environment";
 import {Observable} from "rxjs";
-import {BookModel} from "./models/book";
+import {BookModel} from "./models/bookModel";
+import {FilterModel} from "./models/filterModel";
+import {FilteredBooksModel} from "./models/filteredBooksModel";
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +18,10 @@ export class BooksService {
 
   public getBooks(): Observable<BookModel[]> {
     return this.http.get<BookModel[]>(this.apiUrl);
+  }
+
+  public getFilteredBooks(filter: FilterModel): Observable<FilteredBooksModel[]> {
+    return this.http.post<FilteredBooksModel[]>(`${this.apiUrl}/filter`, filter);
   }
 
   public deleteBook(book: BookModel) {

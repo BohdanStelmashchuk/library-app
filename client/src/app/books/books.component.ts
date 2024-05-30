@@ -1,9 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {BookModel} from "../models/book";
+import {BookModel} from "../models/bookModel";
 import {BehaviorSubject, combineLatest, debounceTime, map, Observable, Subject, switchMap, takeUntil} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
-import {FilterModel} from "../models/FilterModel";
+import {FilterModel} from "../models/filterModel";
 import {BooksService} from "../books.service";
+import {FilteredBooksModel} from "../models/filteredBooksModel";
 
 @Component({
   selector: 'app-books',
@@ -15,8 +16,10 @@ export class BooksComponent implements OnInit, OnDestroy {
   books$: Observable<BookModel[]> = this.booksSubject.asObservable();
   private titleFilter$ = new BehaviorSubject<string>('');
   private authorsFilter$ = new BehaviorSubject<string[]>([]);
-  private filterObservable$ = new Observable ();
+  private filterObservable$ = new Observable<FilterModel>();
   private destroySubject = new Subject();
+
+  result$!: Observable<FilteredBooksModel[]>;
 
   constructor(private route: ActivatedRoute,
               private bookService: BooksService) {}
@@ -40,12 +43,9 @@ export class BooksComponent implements OnInit, OnDestroy {
       }) as FilterModel)
     );
 
-    this.filterObservable$.pipe(
-      switchMap(filter => this.bookService.getBooks()),
+    this.result$ = this.filterObservable$.pipe(
+      switchMap(filter => this.bookService.getFilteredBooks(filter)),
       takeUntil(this.destroySubject)
-    ).subscribe({
-      next: value => this.booksSubject.next(value)
-      }
     );
   }
 

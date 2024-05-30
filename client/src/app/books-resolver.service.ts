@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from "@angular/router";
 import { BooksService } from "./books.service";
 import { catchError, Observable, of } from "rxjs";
-import { BookModel } from "./models/book";
+import { BookModel } from "./models/bookModel";
 
 @Injectable({
   providedIn: 'root'

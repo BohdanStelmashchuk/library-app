@@ -3,5 +3,5 @@ export interface BookModel {
   title: string;
   isbn: string;
   price: number;
-  publisherId: number;
+  //publisherId: number;
 }

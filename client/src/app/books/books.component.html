@@ -1,33 +1,38 @@
-<ng-container *ngIf="(books$ | async) as books">
+<ng-container *ngIf="(result$ | async) as books">
   <h1 id="tableLabel" class="mb-4">Books</h1>
 
   <p *ngIf="books.length === 0" class="text-muted"><em>There are no books in the database.</em></p>
 
-  <!--Filtering by book title using book.pipe.ts-->
-  <!--<div class="form-group">-->
-  <!--  <input type="search" class="form-control" [(ngModel)]="filter" placeholder="Filter by book title">-->
-  <!--</div>-->
   <input type="text" id="book-title-input" placeholder="Filter by book title" (input)="onTitleFilterChange($event)">
   <input type="text" id="book-authors-input" placeholder="Filter by book authors" (input)="onAuthorsFilterChange($event)">
 
   <table class="table table-striped table-bordered table-hover" aria-labelledby="tableLabel" *ngIf="books.length">
+
     <thead class="thead-dark">
     <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Title</th>
+      <th scope="col">Book ID</th>
+      <th scope="col">Book Title</th>
       <th scope="col">ISBN</th>
       <th scope="col">Price</th>
-      <th scope="col">Publisher ID</th>
+      <th scope="col">Author ID</th>
+      <th scope="col">Author Name</th>
+      <th scope="col">Author Surname</th>
+      <th scope="col">Author Email</th>
     </tr>
     </thead>
+
     <tbody>
     <tr *ngFor="let book of books">
-      <td class="text-truncate">{{ book.id }}</td>
+      <td class="text-truncate">{{ book.bookId }}</td>
       <td>{{ book.title }}</td>
       <td>{{ book.isbn }}</td>
       <td>{{ book.price }}</td>
-      <td>{{ book.publisherId }}</td>
+      <td>{{ book.authorId }}</td>
+      <td>{{ book.name }}</td>
+      <td>{{ book.surname }}</td>
+      <td>{{ book.email }}</td>
     </tr>
     </tbody>
+
   </table>
 </ng-container>
