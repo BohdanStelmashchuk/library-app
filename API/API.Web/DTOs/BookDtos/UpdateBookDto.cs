@@ -12,7 +12,7 @@ namespace API.Web.DTOs.BookDtos
 
     public static class UpdateBookMapper
     {
-        public static Book ToEntity(this UpdateBookDto updateBookDto)
+        public static Book ToEntity (this UpdateBookDto updateBookDto)
         {
             return new Book
             {

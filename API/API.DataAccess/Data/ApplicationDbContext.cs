@@ -14,6 +14,7 @@ namespace API.DataAccess.Data
         public DbSet<Publisher> Publishers { get; set; }
         public DbSet<BookAuthor> BookAuthors { get; set; }
         public DbSet<FilteredBooks> FilteredBooks { get; set; }
+        public DbSet<BorrowersByBookId> BorrowersByBookId { get; set; }
 
         public ApplicationDbContext (DbContextOptions<ApplicationDbContext> options) : base(options) {}
 
@@ -45,6 +46,7 @@ namespace API.DataAccess.Data
             modelBuilder.Entity<Book>().Property(x => x.Price).HasPrecision(10, 5);
 
             modelBuilder.Entity<FilteredBooks>().HasNoKey();
+            modelBuilder.Entity<BorrowersByBookId>().HasNoKey();
             base.OnModelCreating(modelBuilder);
 
             var bookList = new Book[]
@@ -99,9 +101,50 @@ namespace API.DataAccess.Data
 
             };
             modelBuilder.Entity<Author>().HasData(authorList);
+
+            var borrowersList = new Borrower[]
+            {
+                new Borrower { Id = 1, Name = "Ron", Surname = "Walker", Email = "ron.walker@example.com", PhoneNumber = "3806747254818" },
+                new Borrower { Id = 2, Name = "Jane", Surname = "Doe", Email = "jane.doe@example.com", PhoneNumber = "380671234567" },
+                new Borrower { Id = 3, Name = "John", Surname = "Smith", Email = "john.smith@example.com", PhoneNumber = "380671234568" },
+                new Borrower { Id = 4, Name = "Emily", Surname = "Johnson", Email = "emily.johnson@example.com", PhoneNumber = "380671234569" },
+                new Borrower { Id = 5, Name = "Michael", Surname = "Brown", Email = "michael.brown@example.com", PhoneNumber = "380671234570" },
+                new Borrower { Id = 6, Name = "Jessica", Surname = "Davis", Email = "jessica.davis@example.com", PhoneNumber = "380671234571" },
+                new Borrower { Id = 7, Name = "David", Surname = "Miller", Email = "david.miller@example.com", PhoneNumber = "380671234572" },
+                new Borrower { Id = 8, Name = "Sarah", Surname = "Wilson", Email = "sarah.wilson@example.com", PhoneNumber = "380671234573" },
+                new Borrower { Id = 9, Name = "Daniel", Surname = "Moore", Email = "daniel.moore@example.com", PhoneNumber = "380671234574" },
+                new Borrower { Id = 10, Name = "Laura", Surname = "Taylor", Email = "laura.taylor@example.com", PhoneNumber = "380671234575" }
+            };
+            modelBuilder.Entity<Borrower>().HasData(borrowersList);
+
+            var loansList = new Loan[]
+            {
+                new Loan { Id = 1, BookId = 12, BorrowerId = 2, LoanDate = new DateTime(2022, 2, 24), ReturnDate = new DateTime(2022, 4, 24) },
+                new Loan { Id = 2, BookId = 5, BorrowerId = 1, LoanDate = new DateTime(2022, 1, 15), ReturnDate = new DateTime(2022, 3, 15) },
+                new Loan { Id = 3, BookId = 7, BorrowerId = 3, LoanDate = new DateTime(2023, 3, 10), ReturnDate = new DateTime(2023, 5, 10) },
+                new Loan { Id = 4, BookId = 2, BorrowerId = 4, LoanDate = new DateTime(2023, 4, 12), ReturnDate = new DateTime(2023, 6, 12) },
+                new Loan { Id = 5, BookId = 8, BorrowerId = 5, LoanDate = new DateTime(2022, 5, 5), ReturnDate = new DateTime(2022, 7, 5) },
+                new Loan { Id = 6, BookId = 10, BorrowerId = 6, LoanDate = new DateTime(2023, 6, 1), ReturnDate = new DateTime(2023, 8, 1) },
+                new Loan { Id = 7, BookId = 4, BorrowerId = 7, LoanDate = new DateTime(2022, 7, 20), ReturnDate = new DateTime(2022, 9, 20) },
+                new Loan { Id = 8, BookId = 6, BorrowerId = 8, LoanDate = new DateTime(2023, 8, 15), ReturnDate = new DateTime(2023, 10, 15) },
+                new Loan { Id = 9, BookId = 9, BorrowerId = 9, LoanDate = new DateTime(2022, 9, 30), ReturnDate = new DateTime(2022, 11, 30) },
+                new Loan { Id = 10, BookId = 11, BorrowerId = 10, LoanDate = new DateTime(2023, 10, 1), ReturnDate = new DateTime(2023, 12, 1) },
+                new Loan { Id = 11, BookId = 12, BorrowerId = 1, LoanDate = new DateTime(2023, 1, 10), ReturnDate = new DateTime(2023, 3, 10) },
+                new Loan { Id = 12, BookId = 12, BorrowerId = 3, LoanDate = new DateTime(2023, 2, 15), ReturnDate = new DateTime(2023, 4, 15) },
+                new Loan { Id = 13, BookId = 12, BorrowerId = 4, LoanDate = new DateTime(2023, 5, 20), ReturnDate = new DateTime(2023, 7, 20) },
+                new Loan { Id = 14, BookId = 12, BorrowerId = 5, LoanDate = new DateTime(2023, 3, 25), ReturnDate = new DateTime(2023, 5, 25) },
+                new Loan { Id = 15, BookId = 12, BorrowerId = 6, LoanDate = new DateTime(2023, 6, 30), ReturnDate = new DateTime(2023, 8, 30) },
+                new Loan { Id = 16, BookId = 12, BorrowerId = 7, LoanDate = new DateTime(2023, 4, 5), ReturnDate = new DateTime(2023, 6, 5) },
+                new Loan { Id = 17, BookId = 12, BorrowerId = 8, LoanDate = new DateTime(2023, 7, 10), ReturnDate = new DateTime(2023, 9, 10) },
+                new Loan { Id = 18, BookId = 12, BorrowerId = 9, LoanDate = new DateTime(2023, 5, 15), ReturnDate = new DateTime(2023, 7, 15) },
+                new Loan { Id = 19, BookId = 12, BorrowerId = 10, LoanDate = new DateTime(2023, 8, 20), ReturnDate = new DateTime(2023, 10, 20) },
+                new Loan { Id = 20, BookId = 12, BorrowerId = 2, LoanDate = new DateTime(2023, 9, 25), ReturnDate = new DateTime(2023, 11, 25) }
+
+            };
+            modelBuilder.Entity<Loan>().HasData(loansList);
         }
 
-        public async Task<List<FilteredBooks>> GetFilteredBooksAsync(BookFilter bookFilter)
+        public async Task<List<FilteredBooks>> GetFilteredBooksAsync (BookFilter bookFilter)
         {
             var titleParam = new SqlParameter("@Title", bookFilter.Title ?? (object)DBNull.Value);
             var authorsParam = new SqlParameter("@Authors", string.Join(",", bookFilter.Authors));
@@ -109,6 +152,14 @@ namespace API.DataAccess.Data
             var result = await FilteredBooks.FromSqlRaw("EXEC [dbo].[GetFilteredBooks] @Title, @Authors", titleParam, authorsParam)
                                             .ToListAsync();
 
+            return result;
+        }
+
+        public async Task<List<BorrowersByBookId>> GetBorrowersByBookIdAsync (int bookId)
+        {
+            var bookIdParam = new SqlParameter("@bookId", bookId);
+
+            var result = await BorrowersByBookId.FromSqlRaw("EXEC [dbo].[GetBorrowersByBookId] @bookId", bookIdParam).ToListAsync();
             return result;
         }
 

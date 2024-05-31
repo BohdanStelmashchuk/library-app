@@ -10,7 +10,7 @@ namespace API.Web.DTOs.BookDtos
 
     public static class BookFilterMapper
     {
-        public static BookFilter ToFilterModel(this BookFilterDto bookFilterDto)
+        public static BookFilter ToFilterModel (this BookFilterDto bookFilterDto)
         {
             return new BookFilter
             {

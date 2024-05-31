@@ -8,7 +8,7 @@ namespace API.Services.Services
     {
         private readonly IBookRepository _bookRepository;
 
-        public BookService(IBookRepository bookRepository)
+        public BookService (IBookRepository bookRepository)
         {
             _bookRepository = bookRepository;
         }
@@ -18,27 +18,27 @@ namespace API.Services.Services
             return await _bookRepository.GetAllAsync();
         }
 
-        public async Task<Book> GetByIdAsync(int id)
+        public async Task<Book> GetByIdAsync (int id)
         {
             return await _bookRepository.GetByIdAsync(id);
         }
 
-        public async Task<List<FilteredBooks>> GetFilteredAsync(BookFilter bookFilter)
+        public async Task<List<FilteredBooks>> GetFilteredAsync (BookFilter bookFilter)
         {
             return await _bookRepository.GetFilteredAsync(bookFilter);
         }
 
-        public async Task AddAsync(Book book)
+        public async Task AddAsync (Book book)
         {
             await _bookRepository.AddAsync(book);
         }
 
-        public async Task UpdateAsync(int id, Book book)
+        public async Task UpdateAsync (int id, Book book)
         {
             await _bookRepository.UpdateAsync(id, book);
         }
 
-        public async Task DeleteByIdAsync(int id)
+        public async Task DeleteByIdAsync (int id)
         {
             await _bookRepository.DeleteByIdAsync(id);
         }

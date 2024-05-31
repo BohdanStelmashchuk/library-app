@@ -5,11 +5,11 @@ namespace API.Core.Interfaces
 {
     public interface IBookRepository
     {
-        Task<Book> GetByIdAsync(int id);
+        Task<Book> GetByIdAsync (int id);
         Task<IEnumerable<Book>> GetAllAsync();
-        Task<List<FilteredBooks>> GetFilteredAsync(BookFilter bookFilter);
-        Task AddAsync(Book book);
-        Task UpdateAsync(int id, Book book);
-        Task DeleteByIdAsync(int id);
+        Task<List<FilteredBooks>> GetFilteredAsync (BookFilter bookFilter);
+        Task AddAsync (Book book);
+        Task UpdateAsync (int id, Book book);
+        Task DeleteByIdAsync (int id);
     }
 }

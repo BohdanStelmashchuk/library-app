@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from "@angular/router";
-import { BooksService } from "./books.service";
+import { BooksService } from "../services/books.service";
 import { catchError, Observable, of } from "rxjs";
-import { BookModel } from "./models/bookModel";
+import { BookModel } from "../models/book.model";
 
 @Injectable({
   providedIn: 'root'

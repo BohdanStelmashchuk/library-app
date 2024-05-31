@@ -13,7 +13,7 @@ namespace API.Web.DTOs.BookDtos
 
     public static class BookMapper
     {
-        public static BookDto ToDto(this Book book)
+        public static BookDto ToDto (this Book book)
         {
             return new BookDto
             {

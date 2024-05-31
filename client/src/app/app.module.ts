@@ -5,14 +5,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from "@angular/common/http";
 import { BooksComponent } from './books/books.component';
-import {BookPipe} from "./book.pipe";
+import {BookPipe} from "./pipes/book.pipe";
 import {FormsModule} from "@angular/forms";
+import { BorrowersComponent } from './borrowers/borrowers.component';
+import { BorrowComponent } from './borrow/borrow.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BooksComponent,
-    BookPipe
+    BookPipe,
+    BorrowersComponent,
+    BorrowComponent
   ],
   imports: [
     BrowserModule,

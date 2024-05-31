@@ -20,24 +20,24 @@ public class BookRepository : IBookRepository
         return await _dbContext.Books.ToListAsync();
     }
 
-    public async Task<Book> GetByIdAsync(int id)
+    public async Task<Book> GetByIdAsync (int id)
     {
         var book = await _dbContext.Books.FirstOrDefaultAsync(x => x.Id == id);
         return book == null ? throw new KeyNotFoundException() : book;
     }
 
-    public async Task<List<FilteredBooks>> GetFilteredAsync(BookFilter bookFilter)
+    public async Task<List<FilteredBooks>> GetFilteredAsync (BookFilter bookFilter)
     {
         return await _dbContext.GetFilteredBooksAsync(bookFilter);
     }
 
-    public async Task AddAsync(Book book)
+    public async Task AddAsync (Book book)
     {
         await _dbContext.Books.AddAsync(book);
         await _dbContext.SaveChangesAsync();
     }
 
-    public async Task UpdateAsync(int id, Book book)
+    public async Task UpdateAsync (int id, Book book)
     {
         var bookToUpdate = await _dbContext.Books.FirstOrDefaultAsync(x => x.Id == id);
         
@@ -54,7 +54,7 @@ public class BookRepository : IBookRepository
         await _dbContext.SaveChangesAsync();
     }
 
-    public async Task DeleteByIdAsync(int id)
+    public async Task DeleteByIdAsync (int id)
     {
         var book = await _dbContext.Books.FirstOrDefaultAsync(x => x.Id == id);
         if (book != null)

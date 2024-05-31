@@ -1,10 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {BookModel} from "../models/bookModel";
+import {BookModel} from "../models/book.model";
 import {BehaviorSubject, combineLatest, debounceTime, map, Observable, Subject, switchMap, takeUntil} from "rxjs";
-import {ActivatedRoute} from "@angular/router";
-import {FilterModel} from "../models/filterModel";
-import {BooksService} from "../books.service";
-import {FilteredBooksModel} from "../models/filteredBooksModel";
+import {ActivatedRoute, Router} from "@angular/router";
+import {FilterModel} from "../models/filter.model";
+import {BooksService} from "../services/books.service";
+import {FilteredBooksModel} from "../models/filteredBooks.model";
 
 @Component({
   selector: 'app-books',
@@ -13,7 +13,6 @@ import {FilteredBooksModel} from "../models/filteredBooksModel";
 })
 export class BooksComponent implements OnInit, OnDestroy {
   private booksSubject = new Subject<BookModel[]>();
-  books$: Observable<BookModel[]> = this.booksSubject.asObservable();
   private titleFilter$ = new BehaviorSubject<string>('');
   private authorsFilter$ = new BehaviorSubject<string[]>([]);
   private filterObservable$ = new Observable<FilterModel>();
@@ -22,6 +21,7 @@ export class BooksComponent implements OnInit, OnDestroy {
   result$!: Observable<FilteredBooksModel[]>;
 
   constructor(private route: ActivatedRoute,
+              private router: Router,
               private bookService: BooksService) {}
 
   ngOnInit() {
