@@ -3,9 +3,6 @@ export interface FilteredBooksModel {
   title: string;
   isbn: string;
   price: number;
-  authorId: number;
-  name: string;
-  surname: string;
-  email: string;
-  birthDate: Date;
+  authors: string;
+  isLoaned: boolean;
 }

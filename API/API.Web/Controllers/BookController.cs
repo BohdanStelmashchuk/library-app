@@ -1,5 +1,4 @@
-﻿using API.Core.Entities;
-using API.Core.Interfaces;
+﻿using API.Core.Interfaces;
 using API.Core.Models;
 using API.Web.DTOs.BookDtos;
 using Microsoft.AspNetCore.Mvc;

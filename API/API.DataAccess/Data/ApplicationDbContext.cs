@@ -48,6 +48,7 @@ namespace API.DataAccess.Data
             modelBuilder.Entity<FilteredBooks>().HasNoKey();
             modelBuilder.Entity<BorrowersByBookId>().HasNoKey();
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Loan>().Property(l => l.ReturnDate).HasColumnType("datetime2");
 
             var bookList = new Book[]
             {
@@ -149,7 +150,7 @@ namespace API.DataAccess.Data
             var titleParam = new SqlParameter("@Title", bookFilter.Title ?? (object)DBNull.Value);
             var authorsParam = new SqlParameter("@Authors", string.Join(",", bookFilter.Authors));
 
-            var result = await FilteredBooks.FromSqlRaw("EXEC [dbo].[GetFilteredBooks] @Title, @Authors", titleParam, authorsParam)
+            var result = await FilteredBooks.FromSqlRaw("EXEC [dbo].[GetFilteredBooksWithAuthors] @Title, @Authors", titleParam, authorsParam)
                                             .ToListAsync();
 
             return result;
@@ -159,7 +160,8 @@ namespace API.DataAccess.Data
         {
             var bookIdParam = new SqlParameter("@bookId", bookId);
 
-            var result = await BorrowersByBookId.FromSqlRaw("EXEC [dbo].[GetBorrowersByBookId] @bookId", bookIdParam).ToListAsync();
+            var result = await BorrowersByBookId.FromSqlRaw("EXEC [dbo].[GetBorrowersByBookId] @bookId", bookIdParam)
+                                                .ToListAsync();
             return result;
         }
 

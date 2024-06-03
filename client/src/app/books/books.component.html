@@ -16,10 +16,7 @@
         <th scope="col">Book Title</th>
         <th scope="col">ISBN</th>
         <th scope="col">Price</th>
-        <th scope="col">Author ID</th>
-        <th scope="col">Author Name</th>
-        <th scope="col">Author Surname</th>
-        <th scope="col">Author Email</th>
+        <th scope="col">Authors</th>
       </tr>
       </thead>
 
@@ -29,12 +26,12 @@
         <td>{{ book.title }}</td>
         <td>{{ book.isbn }}</td>
         <td>{{ book.price }}</td>
-        <td>{{ book.authorId }}</td>
-        <td>{{ book.name }}</td>
-        <td>{{ book.surname }}</td>
-        <td>{{ book.email }}</td>
+        <td>{{ book.authors }}</td>
         <td>
           <a [routerLink]="[book?.bookId, 'borrowers']">Show borrowers</a>
+        </td>
+        <td *ngIf="!book.isLoaned">
+          <a [routerLink]="[book?.bookId, 'borrow']">Borrow</a>
         </td>
       </tr>
       </tbody>

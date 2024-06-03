@@ -15,7 +15,7 @@ const routes: Routes = [
         path: ':bookId/borrowers', component: BorrowersComponent
       },
       {
-        path: ':id/borrow', component: BorrowComponent
+        path: ':bookId/borrow', component: BorrowComponent
       }
     ]
   },

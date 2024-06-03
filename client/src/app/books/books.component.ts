@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BookModel} from "../models/book.model";
 import {BehaviorSubject, combineLatest, debounceTime, map, Observable, Subject, switchMap, takeUntil} from "rxjs";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {FilterModel} from "../models/filter.model";
 import {BooksService} from "../services/books.service";
 import {FilteredBooksModel} from "../models/filteredBooks.model";
@@ -20,9 +20,7 @@ export class BooksComponent implements OnInit, OnDestroy {
 
   result$!: Observable<FilteredBooksModel[]>;
 
-  constructor(private route: ActivatedRoute,
-              private router: Router,
-              private bookService: BooksService) {}
+  constructor(private route: ActivatedRoute, private bookService: BooksService) {}
 
   ngOnInit() {
     this.route.data.pipe(

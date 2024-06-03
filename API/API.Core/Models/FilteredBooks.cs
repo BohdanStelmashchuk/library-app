@@ -6,10 +6,7 @@
         public string Title { get; set; }
         public string ISBN { get; set; }
         public decimal Price { get; set; }
-        public int AuthorId { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public string Email { get; set; }
-        public DateTime BirthDate { get; set; }
+        public string Authors { get; set; }
+        public bool? IsLoaned { get; set; }
     }
 }

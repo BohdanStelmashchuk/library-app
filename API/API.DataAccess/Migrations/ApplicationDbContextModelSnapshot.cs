@@ -47,7 +47,7 @@ namespace API.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Authors");
+                    b.ToTable("Authors", (string)null);
 
                     b.HasData(
                         new
@@ -159,7 +159,7 @@ namespace API.DataAccess.Migrations
 
                     b.HasIndex("PublisherId");
 
-                    b.ToTable("Books");
+                    b.ToTable("Books", (string)null);
 
                     b.HasData(
                         new
@@ -368,7 +368,7 @@ namespace API.DataAccess.Migrations
 
                     b.HasIndex("AuthorId");
 
-                    b.ToTable("BookAuthors");
+                    b.ToTable("BookAuthors", (string)null);
                 });
 
             modelBuilder.Entity("API.Core.Entities.Borrower", b =>
@@ -397,7 +397,7 @@ namespace API.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Borrowers");
+                    b.ToTable("Borrowers", (string)null);
 
                     b.HasData(
                         new
@@ -508,7 +508,7 @@ namespace API.DataAccess.Migrations
 
                     b.HasIndex("BorrowerId");
 
-                    b.ToTable("Loans");
+                    b.ToTable("Loans", (string)null);
 
                     b.HasData(
                         new
@@ -687,7 +687,7 @@ namespace API.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Publishers");
+                    b.ToTable("Publishers", (string)null);
 
                     b.HasData(
                         new

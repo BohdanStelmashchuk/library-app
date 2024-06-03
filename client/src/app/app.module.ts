@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import {HttpClientModule} from "@angular/common/http";
 import { BooksComponent } from './books/books.component';
 import {BookPipe} from "./pipes/book.pipe";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { BorrowersComponent } from './borrowers/borrowers.component';
 import { BorrowComponent } from './borrow/borrow.component';
 
@@ -22,7 +22,8 @@ import { BorrowComponent } from './borrow/borrow.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
