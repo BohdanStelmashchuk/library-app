@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {LoansService} from "../services/loans.service";
 import {LoanModel} from "../models/loan.model";
 import {ActivatedRoute} from "@angular/router";
-import {Subscription} from "rxjs";
+import {Subject, Subscription, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-borrow',
@@ -14,17 +14,19 @@ export class BorrowComponent implements OnInit, OnDestroy {
   loanForm!: FormGroup;
   routeSub!: Subscription;
   bookId!: number;
+  private destroy$ = new Subject<void>();
 
   constructor(private fb: FormBuilder,
               private loanService: LoansService,
               private router: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.routeSub = this.router.params.subscribe({
+    this.routeSub = this.router.params.pipe(
+      takeUntil(this.destroy$)).subscribe({
       next: params => {
-        this.bookId = +params['bookId'];
+        this.bookId = +params['bookId']
       },
-    })
+    });
 
     this.loanForm = this.fb.group({
       bookId: [this.bookId],
@@ -35,7 +37,8 @@ export class BorrowComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.routeSub.unsubscribe();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   onSubmit(): void {
